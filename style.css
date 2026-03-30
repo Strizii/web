@@ -2,151 +2,148 @@
     color-scheme: dark;
     --bg-base: #020503;
     --bg-emerald-deep: #020c08; 
-    --bg-elevated: rgba(10, 23, 15, 0.82);
-    --border-soft: rgba(255, 255, 255, 0.05);
+    --bg-elevated: rgba(10, 23, 15, 0.9);
+    --border-soft: rgba(255, 255, 255, 0.08);
     --green-neon: #00ff88;
     --green-gradient: linear-gradient(135deg, #00ff88, #2ecc71);
-    --grid-color: rgba(0, 255, 136, 0.02);
-    --grid-pulse-color: rgba(0, 255, 136, 0.12); /* Subtelniejszy kolor pulsu */
     --text-primary: #f2fcf6;
     --text-secondary: #aecaaf;
     --red-alert: #ff4f4f;
     --font-family: "Outfit", sans-serif;
-    --ease-out-quint: cubic-bezier(0.23, 1, 0.32, 1); /* Płynna funkcja czasu */
+    --ease-out-quint: cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; scroll-behavior: smooth; }
 body { min-height: 100vh; font-family: var(--font-family); color: var(--text-primary); background-color: var(--bg-base); overflow-x: hidden; }
 
-/* --- TŁO --- */
-.background-system { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -3; overflow: hidden; }
+/* --- SYSTEM TŁA --- */
+.background-system { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -3; pointer-events: none; }
 .bg-gradient { position: absolute; width: 100%; height: 100%; background: radial-gradient(circle at 15% 15%, var(--bg-emerald-deep) 0%, var(--bg-base) 100%); }
-.grid-base, .grid-pulse { position: absolute; width: 200%; height: 200%; top: -50%; left: -50%; background-image: linear-gradient(var(--grid-color) 1px, transparent 1px), linear-gradient(90deg, var(--grid-color) 1px, transparent 1px); background-size: 60px 60px; transform: rotate(-5deg); }
+.grid-base, .grid-pulse { position: absolute; width: 200%; height: 200%; top: -50%; left: -50%; background-size: 60px 60px; transform: rotate(-5deg); }
+.grid-base { background-image: linear-gradient(rgba(0, 255, 136, 0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 255, 136, 0.04) 1px, transparent 1px); animation: gridFloat 120s linear infinite; }
+@keyframes gridFloat { from { transform: rotate(-5deg) translateY(0); } to { transform: rotate(-5deg) translateY(60px); } }
 
-/* POPRAWA: Płynniejsza animacja siatki */
-.grid-pulse { 
-    background-image: linear-gradient(var(--grid-pulse-color) 1.5px, transparent 1.5px), linear-gradient(90deg, var(--grid-pulse-color) 1.5px, transparent 1.5px); 
-    opacity: 0; 
-    -webkit-mask-size: 100% 100%; mask-size: 100% 100%; 
-    -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
-    animation: smoothPulse 7s var(--ease-out-quint) infinite; /* Dłuższa i płynniejsza animacja */
+/* --- POŚWIATA MYSZKI --- */
+.cursor-glow { 
+    position: fixed; 
+    top: 0; left: 0; 
+    width: 600px; height: 600px; 
+    background: radial-gradient(circle, rgba(0, 255, 136, 0.12) 0%, transparent 70%); 
+    border-radius: 50%; 
+    pointer-events: none; 
+    z-index: -1; 
+    will-change: transform;
+    margin-left: -300px; 
+    margin-top: -300px;
 }
 
-/* Definicje masek dla rogów */
-.from-top-left { -webkit-mask-image: radial-gradient(circle at 0% 0%, black 0%, transparent 70%); mask-image: radial-gradient(circle at 0% 0%, black 0%, transparent 70%); }
-.from-top-right { -webkit-mask-image: radial-gradient(circle at 100% 0%, black 0%, transparent 70%); mask-image: radial-gradient(circle at 100% 0%, black 0%, transparent 70%); }
-.from-bottom-left { -webkit-mask-image: radial-gradient(circle at 0% 100%, black 0%, transparent 70%); mask-image: radial-gradient(circle at 0% 100%, black 0%, transparent 70%); }
-.from-bottom-right { -webkit-mask-image: radial-gradient(circle at 100% 100%, black 0%, transparent 70%); mask-image: radial-gradient(circle at 100% 100%, black 0%, transparent 70%); }
+.section-bg-glow { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at center, rgba(0, 255, 136, 0.03) 0%, transparent 100%); z-index: -2; pointer-events: none; }
 
-@keyframes smoothPulse {
-    0% { opacity: 0; -webkit-mask-position: 0% 0%; mask-position: 0% 0%; }
-    10% { opacity: 1; } /* Szybkie wejście */
-    90% { opacity: 1; } /* Długie trwanie */
-    100% { opacity: 0; -webkit-mask-position: 100% 100%; mask-position: 100% 100%; } /* Płynne wyjście i przesunięcie */
+/* --- LAYOUT --- */
+.giveaways-main-wrapper { max-width: 1300px; margin: 0 auto; padding: 0 24px; }
+
+/* --- HERO --- */
+.content-section-hero { padding: 160px 0 80px 0; display: flex; flex-direction: column; }
+.giveaways-hero-clean { display: flex; align-items: center; gap: 80px; margin-bottom: 60px; }
+
+.avatar-glow-container {
+    position: relative;
+    padding: 15px;
+    background: rgba(0, 255, 136, 0.05);
+    border: 3px solid var(--green-neon);
+    border-radius: 60px;
+    box-shadow: 0 0 60px rgba(0, 255, 136, 0.3), inset 0 0 30px rgba(0, 255, 136, 0.15);
+    flex-shrink: 0;
+    transition: transform 0.3s var(--ease-out-quint), box-shadow 0.3s var(--ease-out-quint); 
 }
 
-/* --- KONTENER GŁÓWNY --- */
-.giveaways-main-wrapper {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 0 24px;
-}
-
-/* --- HERO UKŁAD --- */
-.content-section-hero {
-    padding: 100px 0 60px 0;
-    display: flex;
-    flex-direction: column;
-}
-
-.giveaways-hero-clean {
-    display: flex;
-    align-items: center;
-    gap: 50px;
-    margin-bottom: 40px;
+.avatar-glow-container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 70px rgba(0, 255, 136, 0.45), inset 0 0 30px rgba(0, 255, 136, 0.15);
 }
 
 .izitris-logo {
-    font-size: clamp(3.5rem, 10vw, 6rem);
-    font-weight: 900;
-    color: var(--green-neon);
-    text-shadow: 0 0 30px rgba(0, 255, 136, 0.4);
-    line-height: 0.9;
+    width: 350px;
+    height: 350px;
+    overflow: hidden; 
+    border-radius: 45px;
+    background: var(--bg-emerald-deep);
+    display: flex; align-items: center; justify-content: center;
 }
 
-.giveaways-hero-copy h1 { font-size: 2.8rem; margin-bottom: 8px; }
-.giveaways-hero-copy p { color: var(--text-secondary); max-width: 480px; font-size: 1.05rem; line-height: 1.5; }
-
-/* --- STATYSTYKI --- */
-.stats-container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-    background: rgba(10, 23, 15, 0.4);
-    backdrop-filter: blur(12px);
-    padding: 35px;
-    border-radius: 35px;
-    border: 1px solid var(--border-soft);
+.izitris-logo img { 
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
+    transition: transform 0.5s var(--ease-out-quint); 
+    will-change: transform;
 }
 
-/* ZMIANA: Środkowanie statystyk */
-.stat-box {
-    text-align: center;
-    padding: 10px;
+.avatar-glow-container:hover .izitris-logo img {
+    transform: scale(1.1);
 }
-.stat-value { font-size: 2.2rem; font-weight: 800; color: var(--green-neon); display: block; margin-bottom: 4px; }
-.stat-label { font-size: 0.8rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 2px; display: block; }
 
-/* --- RESZTA SEKCJI --- */
-.content-section { padding: 60px 0; }
-.giveaways-navigation-container { display: flex; justify-content: center; position: sticky; top: 20px; z-index: 1000; padding: 20px 0; }
-.giveaways-liquid-nav { background: var(--bg-elevated); backdrop-filter: blur(20px); border: 1px solid var(--border-soft); border-radius: 999px; padding: 5px; display: flex; }
-.nav-link { text-decoration: none; color: var(--text-secondary); padding: 10px 22px; border-radius: 999px; transition: 0.3s; font-size: 0.9rem; }
-.nav-link.active { background: var(--green-gradient); color: #020503; font-weight: 700; }
+.giveaways-hero-copy h1 { 
+    font-size: 5rem; 
+    color: #ffffff; 
+    text-shadow: 0 0 40px rgba(255, 255, 255, 0.4); 
+    font-weight: 900; 
+    margin-bottom: 20px;
+    letter-spacing: -2px;
+}
+.giveaways-hero-copy p { color: var(--text-secondary); max-width: 550px; font-size: 1.25rem; line-height: 1.6; }
 
-.giveaways-cta-band { width: 100%; background: rgba(10, 23, 15, 0.4); backdrop-filter: blur(10px); border: 1px solid var(--border-soft); border-radius: 40px; padding: 50px; display: flex; justify-content: space-between; align-items: center; gap: 30px; }
-.social-grid { display: flex; gap: 12px; }
-.social-item { display: flex; align-items: center; gap: 10px; padding: 16px 24px; background: rgba(255,255,255,0.03); border-radius: 16px; text-decoration: none; color: white; border: 1px solid var(--border-soft); transition: 0.3s; }
-.social-item:hover { border-color: var(--green-neon); transform: translateY(-4px); }
+/* --- STATS --- */
+.stats-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; background: rgba(10, 23, 15, 0.6); backdrop-filter: blur(20px); padding: 50px; border-radius: 50px; border: 1px solid var(--border-soft); }
 
-.latest-video-container.small-video { max-width: 800px; margin: 0 auto; padding: 40px 0; text-align: center; }
-.video-responsive-wrapper { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 28px; border: 1px solid var(--border-soft); }
+.stat-box { 
+    text-align: center; /* WYŚRODKOWANIE NAPISÓW */
+}
+
+.stat-value { font-size: 3rem; font-weight: 800; color: var(--green-neon); display: block; margin-bottom: 5px; }
+.stat-label { font-size: 0.9rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 3px; }
+
+/* --- NAV --- */
+.giveaways-navigation-container { display: flex; justify-content: center; position: sticky; top: 25px; z-index: 1000; padding-bottom: 40px; }
+.giveaways-liquid-nav { background: var(--bg-elevated); backdrop-filter: blur(25px); border: 1px solid var(--border-soft); border-radius: 999px; padding: 8px; display: flex; }
+.nav-link { text-decoration: none; color: var(--text-secondary); padding: 14px 32px; border-radius: 999px; transition: 0.3s; font-size: 1rem; font-weight: 500; }
+.nav-link.active { background: var(--green-gradient); color: #020503; font-weight: 700; box-shadow: 0 4px 20px rgba(0, 255, 136, 0.4); }
+
+/* --- SEKCJE --- */
+.content-section { padding: 100px 0; }
+.giveaways-cta-band { width: 100%; background: rgba(10, 23, 15, 0.5); backdrop-filter: blur(15px); border: 1px solid var(--border-soft); border-radius: 50px; padding: 70px; display: flex; justify-content: space-between; align-items: center; gap: 40px; }
+
+.collab-actions { display: flex; gap: 20px; align-items: center; flex-wrap: nowrap; }
+
+.giveaways-primary-btn { background: var(--green-gradient); color: #020503; padding: 22px 44px; border-radius: 20px; font-weight: 800; text-decoration: none; white-space: nowrap; transition: 0.4s var(--ease-out-quint); }
+.giveaways-primary-btn:hover { transform: translateY(-5px); box-shadow: 0 10px 40px rgba(0, 255, 136, 0.5); }
+
+.discord-btn { display: flex; align-items: center; gap: 12px; padding: 22px 35px; background: rgba(255,255,255,0.05); border-radius: 20px; text-decoration: none; color: white; border: 1px solid var(--border-soft); transition: 0.3s; font-weight: 600; }
+.discord-btn:hover { border-color: var(--green-neon); background: rgba(0, 255, 136, 0.08); transform: translateY(-5px); }
+
+.social-grid { display: flex; gap: 15px; }
+.social-item { display: flex; align-items: center; gap: 12px; padding: 20px 30px; background: rgba(255,255,255,0.05); border-radius: 20px; text-decoration: none; color: white; border: 1px solid var(--border-soft); transition: 0.3s; }
+.social-item:hover { border-color: var(--green-neon); background: rgba(0, 255, 136, 0.08); transform: translateY(-5px); }
+
+/* --- VIDEO --- */
+.latest-video-container { max-width: 1000px; margin: 0 auto; text-align: center; }
+.video-responsive-wrapper { position: relative; padding-bottom: 56.25%; border-radius: 40px; overflow: hidden; border: 2px solid var(--border-soft); box-shadow: 0 30px 80px rgba(0,0,0,0.7); }
 .video-responsive-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
 
-.giveaways-primary-btn { background: var(--green-gradient); color: #020503; padding: 16px 32px; border-radius: 14px; font-weight: 700; text-decoration: none; transition: 0.3s; white-space: nowrap; }
-.red-alert { color: var(--red-alert) !important; }
-
-/* --- WSPÓŁPRACA ZMIANY --- */
-/* ZMIANA: Nagłówek szmaragdowy */
-.collab-header { color: var(--green-neon); text-shadow: 0 0 20px rgba(0, 255, 136, 0.3); }
-
-/* ZMIANA: Układ przycisków i zwiększony padding bloku */
-.collab-band { padding: 60px 50px; flex-wrap: wrap; } /* Większy padding góra/dół */
-.collab-actions { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; justify-content: center; }
-
-.giveaways-like-footer { text-align: center; padding: 80px 0 40px; opacity: 0.5; font-size: 0.85rem; }
-.cursor-glow { position: absolute; top: 0; left: 0; width: 400px; height: 400px; background: radial-gradient(circle, rgba(0, 255, 136, 0.08) 0%, transparent 70%); border-radius: 50%; pointer-events: none; margin-left: -200px; margin-top: -200px; z-index: -1; }
-
-.section-bg-glow { 
-    position: fixed; 
-    top: 50%;
-    left: 50%; 
-    transform: translate(-50%, -50%); 
-    width: 1000px; 
-    height: 600px; 
-    background: radial-gradient(circle, rgba(0, 255, 136, 0.05) 0%, transparent 70%); 
-    z-index: -2; 
-    pointer-events: none; 
-}
-
-@media (max-width: 900px) {
-    .giveaways-hero-clean { flex-direction: column; text-align: center; }
-    .giveaways-cta-band { flex-direction: column; text-align: center; gap: 30px; padding: 35px; }
+/* --- MOBILE --- */
+@media (max-width: 1100px) {
+    .giveaways-hero-clean { flex-direction: column; text-align: center; gap: 50px; }
+    .izitris-logo { width: 260px; height: 260px; }
+    .giveaways-hero-copy h1 { font-size: 3.5rem; }
+    .giveaways-cta-band { flex-direction: column; text-align: center; padding: 50px 30px; }
+    .collab-actions { flex-direction: column; width: 100%; }
+    .collab-actions .giveaways-primary-btn, .collab-actions .discord-btn { width: 100%; justify-content: center; }
     .stats-container { grid-template-columns: 1fr; }
-    .social-grid { flex-wrap: wrap; justify-content: center; }
-    
-    /* Dodatkowe poprawki dla Współpracy na mobile */
-    .collab-band { padding: 40px 25px; }
-    .collab-actions { flex-direction: column; width: 100%; gap: 12px; }
-    .collab-actions .giveaways-primary-btn { width: 100%; text-align: center; }
 }
+
+.grid-pulse { background-image: linear-gradient(rgba(0, 255, 136, 0.2) 2px, transparent 2px), linear-gradient(90deg, rgba(0, 255, 136, 0.2) 2px, transparent 2px); opacity: 0; -webkit-mask-size: 100% 100%; mask-size: 100% 100%; animation: smoothPulse 6s var(--ease-out-quint) infinite; }
+@keyframes smoothPulse { 0% { opacity: 0; } 15% { opacity: 1; } 85% { opacity: 1; } 100% { opacity: 0; } }
+
+.giveaways-like-footer { text-align: center; padding: 120px 0 60px; opacity: 0.4; font-size: 0.9rem; }
+.red-alert { color: var(--red-alert) !important; }
+.giveaways-section-kicker { color: var(--green-neon); text-transform: uppercase; letter-spacing: 4px; font-weight: 700; font-size: 0.85rem; margin-bottom: 15px; }
