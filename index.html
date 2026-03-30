@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Izitris - Zielona Społeczność</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+    <div class="background-system">
+        <div class="bg-gradient"></div>
+        <div class="grid-base"></div>
+        <div class="grid-pulse" id="gridPulse"></div>
+    </div>
+
+    <div class="cursor-glow"></div>
+    <div class="section-bg-glow" id="sectionGlow"></div>
+
+    <div class="giveaways-main-wrapper">
+        
+        <nav class="giveaways-navigation-container">
+            <div class="giveaways-liquid-nav">
+                <a href="#home" class="nav-link active">Główna</a>
+                <a href="#socials" class="nav-link">Social Media</a>
+                <a href="#partners" class="nav-link">Partnerzy</a>
+                <a href="#collab" class="nav-link">Współpraca</a>
+            </div>
+        </nav>
+
+        <header id="home" class="content-section-hero">
+            <div class="giveaways-hero-clean">
+                <div class="hero-logo-section">
+                    <div class="izitris-logo">IZITRIS</div>
+                </div>
+                <div class="giveaways-hero-copy">
+                    <div class="giveaways-section-kicker">Witaj w społeczności</div>
+                    <h1>Izitris</h1>
+                    <p>Miejsce stworzone dla graczy. Dołącz do nas i buduj największą zieloną społeczność razem z nami.</p>
+                </div>
+            </div>
+
+            <div class="stats-container">
+                <div class="stat-box">
+                    <span class="stat-value">15k+</span>
+                    <span class="stat-label">Subskrybentów</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-value">50+ mln</span>
+                    <span class="stat-label">Wyświetleń</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-value">500+</span>
+                    <span class="stat-label">Filmów</span>
+                </div>
+            </div>
+        </header>
+
+        <section id="socials" class="content-section">
+            <div class="giveaways-cta-band">
+                <div class="giveaways-cta-band-copy">
+                    <div class="giveaways-section-kicker">Bądź na bieżąco</div>
+                    <h2>Social Media</h2>
+                    <p>Śledź nas na wszystkich platformach, aby nie przegapić nowości.</p>
+                </div>
+                <div class="social-grid">
+                    <a href="#" class="social-item">
+                        <i data-lucide="youtube"></i>
+                        <span>YouTube</span>
+                    </a>
+                    <a href="#" class="social-item">
+                        <i data-lucide="play-circle"></i>
+                        <span>TikTok</span>
+                    </a>
+                    <a href="#" class="social-item">
+                        <i data-lucide="instagram"></i>
+                        <span>Instagram</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <div id="video-section" class="latest-video-container small-video">
+            <div class="giveaways-section-kicker">Oglądaj nas</div>
+            <h2 class="video-title">Najnowszy film</h2>
+            <div class="video-responsive-wrapper">
+                <iframe 
+                    src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
+                    title="Izitris Najnowszy Film" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+        </div>
+
+        <section id="partners" class="content-section">
+            <div class="giveaways-cta-band">
+                <div class="giveaways-cta-band-copy">
+                    <div class="giveaways-section-kicker">Nasi Partnerzy</div>
+                    <h2 class="red-alert">Narazie ni ma :(</h2>
+                    <p>Ubiegnij innych i stań się pierwszą marką!</p>
+                </div>
+                <div class="giveaways-cta-band-actions">
+                    <a href="#collab" class="giveaways-primary-btn">Zostań Pierwszym</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="collab" class="content-section">
+            <div class="giveaways-cta-band collab-band">
+                <div class="giveaways-cta-band-copy">
+                    <div class="giveaways-section-kicker">Masz pytania?</div>
+                    <h2 class="collab-header">Współpraca</h2>
+                    <p>Nasz zespół jest dostępny 24/7. Napisz do nas.</p>
+                </div>
+                <div class="giveaways-cta-band-actions collab-actions">
+                    <a href="mailto:wspolpraca@izitris.pl" class="giveaways-primary-btn">Napisz do nas</a>
+                    <a href="#" class="social-item discord-icon-btn">
+                        <i data-lucide="message-square"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <footer class="giveaways-like-footer">
+            <p>&copy; 2026 Izitris. Wszystkie prawa zastrzeżone.</p>
+        </footer>
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        // LOGIKA LOSOWANIA ROGU I ODŚWIEŻANIA ANIMACJI
+        const gridPulse = document.getElementById('gridPulse');
+        const corners = ['top-left', 'top-right', 'bottom-left', 'bottom-right'];
+        let animationInterval;
+
+        function triggerRandomPulse() {
+            // Usuń starą klasę rogu, aby zresetować maskę
+            gridPulse.className = 'grid-pulse'; 
+            
+            // Wymuś reflow, aby przeglądarka zauważyła reset klasy
+            void gridPulse.offsetWidth; 
+
+            // Wylosuj nowy róg i dodaj klasę
+            const randomCorner = corners[Math.floor(Math.random() * corners.length)];
+            gridPulse.classList.add(`from-${randomCorner}`);
+        }
+
+        // Uruchom od razu i ustaw interwał (nieco dłuższy niż animacja CSS)
+        triggerRandomPulse();
+        animationInterval = setInterval(triggerRandomPulse, 8000); 
+
+        // Reszta skryptów (cursor glow, nav active section)
+        const glow = document.querySelector('.cursor-glow');
+        window.addEventListener('mousemove', (e) => {
+            requestAnimationFrame(() => {
+                glow.style.transform = `translate(${e.pageX}px, ${e.pageY}px)`;
+            });
+        });
+
+        const navLinks = document.querySelectorAll('.nav-link');
+        const sections = document.querySelectorAll('section, header, .latest-video-container');
+
+        window.addEventListener('scroll', () => {
+            const scrollY = window.scrollY;
+            let current = "";
+            sections.forEach(section => {
+                if (scrollY >= section.offsetTop - 300) {
+                    const id = section.getAttribute('id');
+                    if(id) current = id;
+                }
+            });
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').includes(current)) link.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
