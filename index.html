@@ -51,15 +51,15 @@
 
             <div class="stats-container">
                 <div class="stat-box">
-                    <span class="stat-value" id="stat-subs" >15k+</span>
+                    <span class="stat-value" id="stat-subs">...</span>
                     <span class="stat-label">Subskrybentów</span>
                 </div>
                 <div class="stat-box">
-                    <span class="stat-value" id="stat-views" >56+ mln</span>
+                    <span class="stat-value" id="stat-views">...</span>
                     <span class="stat-label">Wyświetleń</span>
                 </div>
                 <div class="stat-box">
-                    <span class="stat-value" id="stat-videos" >500+</span>
+                    <span class="stat-value" id="stat-videos">...</span>
                     <span class="stat-label">Filmów</span>
                 </div>
             </div>
@@ -73,7 +73,7 @@
                     <p>Śledź mnie na wszystkich platformach, aby nie przegapić nowości.</p>
                 </div>
                 <div class="social-grid">
-                    <a href="#" class="social-item">
+                    <a href="https://youtube.com/@IzitriS" target="_blank" class="social-item">
                         <i data-lucide="youtube"></i>
                         <span>YouTube</span>
                     </a>
@@ -95,7 +95,7 @@
             <div class="video-responsive-wrapper">
                 <iframe 
                     id="latestVideo"
-                    src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
+                    src="" 
                     title="Izitris Najnowszy Film" 
                     frameborder="0" 
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
@@ -126,7 +126,7 @@
                 </div>
                 <div class="giveaways-cta-band-actions collab-actions">
                     <a href="mailto:biznesowy.izitris@gmail.com" class="giveaways-primary-btn">Napisz</a>
-                    <a href="" class="social-item discord-btn">
+                    <a href="#" class="social-item discord-btn">
                         <i data-lucide="message-square"></i>
                         <span>Discord</span>
                     </a>
@@ -140,8 +140,10 @@
     </div>
 
     <script>
+        // Inicjalizacja ikon Lucide
         lucide.createIcons();
 
+        // Obsługa animacji siatki (Grid Pulse)
         const gridPulse = document.getElementById('gridPulse');
         const corners = ['top-left', 'top-right', 'bottom-left', 'bottom-right'];
         function triggerRandomPulse() {
@@ -153,6 +155,7 @@
         triggerRandomPulse();
         setInterval(triggerRandomPulse, 8000); 
 
+        // Efekt poświaty myszki
         const glow = document.getElementById('cursorGlow');
         document.addEventListener('mousemove', (e) => {
             const x = e.clientX;
@@ -160,6 +163,7 @@
             glow.style.transform = `translate3d(${x}px, ${y}px, 0)`;
         });
 
+        // Scroll Spy - podświetlanie aktywnego linku w menu
         const navLinks = document.querySelectorAll('.nav-link');
         const sections = document.querySelectorAll('section, header, .latest-video-container');
         window.addEventListener('scroll', () => {
@@ -176,37 +180,47 @@
             });
         });
 
-       async function loadYouTubeData() {
-    try {
-        // Pobieramy dane z Twojego lokalnego pliku JSON
-        const response = await fetch('data.json');
-        const data = await response.json();
+        // FUNKCJA POBIERAJĄCA DANE Z PLIKU JSON
+        async function loadYouTubeData() {
+            try {
+                // Próba pobrania pliku data.json wygenerowanego przez GitHub Actions
+                const response = await fetch('data.json');
+                if (!response.ok) throw new Error('Plik data.json jeszcze nie istnieje');
+                
+                const data = await response.json();
 
-        // Funkcja do formatowania liczb (np. 15400 -> 15.4k)
-        const format = (num) => {
-            const n = parseInt(num);
-            if (n >= 1000000) return (n / 1000000).toFixed(1) + ' mln';
-            if (n >= 1000) return (n / 1000).toFixed(1) + 'k';
-            return n;
-        };
+                // Formatowanie liczb (np. 15400 -> 15.4k)
+                const format = (num) => {
+                    const n = parseInt(num);
+                    if (isNaN(n)) return "...";
+                    if (n >= 1000000) return (n / 1000000).toFixed(1) + ' mln';
+                    if (n >= 1000) return (n / 1000).toFixed(1) + 'k';
+                    return n;
+                };
 
-        // Aktualizacja elementów na stronie
-        document.getElementById('stat-subs').innerText = format(data.subs) + '+';
-        document.getElementById('stat-views').innerText = format(data.views) + '+';
-        document.getElementById('stat-videos').innerText = data.videos;
-        
-        // Aktualizacja filmu
-        const iframe = document.getElementById('latestVideo');
-        if(iframe) {
-            iframe.src = `https://www.youtube.com/embed/${data.videoId}`;
+                // Aktualizacja statystyk
+                document.getElementById('stat-subs').innerText = format(data.subs) + '+';
+                document.getElementById('stat-views').innerText = format(data.views) + '+';
+                document.getElementById('stat-videos').innerText = data.videos;
+                
+                // Aktualizacja iframe z najnowszym filmem
+                const iframe = document.getElementById('latestVideo');
+                if(iframe && data.videoId) {
+                    iframe.src = `https://www.youtube.com/embed/${data.videoId}`;
+                }
+
+            } catch (error) {
+                console.warn("Informacja: Oczekiwanie na dane z GitHub Actions...", error.message);
+                // Wartości domyślne w razie braku pliku
+                document.getElementById('stat-subs').innerText = "15k+";
+                document.getElementById('stat-views').innerText = "56 mln+";
+                document.getElementById('stat-videos').innerText = "500+";
+                document.getElementById('latestVideo').src = "https://www.youtube.com/embed/dQw4w9WgXcQ";
+            }
         }
 
-    } catch (error) {
-        console.error("Błąd ładowania data.json:", error);
-    }
-}
-
-document.addEventListener('DOMContentLoaded', loadYouTubeData);
+        // Uruchom ładowanie danych po wczytaniu strony
+        document.addEventListener('DOMContentLoaded', loadYouTubeData);
     </script>
 </body>
 </html>
