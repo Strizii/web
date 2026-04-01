@@ -1,4 +1,5 @@
 :root {
+    color-scheme: dark;
     --bg-base: #020503;
     --bg-emerald-deep: #020c08; 
     --bg-elevated: rgba(10, 23, 15, 0.9);
@@ -25,13 +26,13 @@ html, body {
     font-family: var(--font-family);
 }
 
-/* --- TŁO --- */
+/* --- SYSTEM TŁA --- */
 .background-system { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -3; pointer-events: none; }
 .bg-gradient { position: absolute; width: 100%; height: 100%; background: radial-gradient(circle at 15% 15%, var(--bg-emerald-deep) 0%, var(--bg-base) 100%); }
 .grid-base { position: absolute; width: 200%; height: 200%; top: -50%; left: -50%; background-image: linear-gradient(rgba(0, 255, 136, 0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 255, 136, 0.04) 1px, transparent 1px); background-size: 60px 60px; transform: rotate(-5deg); animation: gridFloat 120s linear infinite; }
 @keyframes gridFloat { from { transform: rotate(-5deg) translateY(0); } to { transform: rotate(-5deg) translateY(60px); } }
 
-/* --- HERO & LAYOUT --- */
+/* --- LAYOUT --- */
 .giveaways-main-wrapper { max-width: 1300px; margin: 0 auto; padding: 0 20px; }
 .content-section-hero { padding: 150px 0 50px; text-align: center; }
 .giveaways-hero-clean { display: flex; align-items: center; gap: 60px; justify-content: center; margin-bottom: 50px; }
@@ -40,7 +41,6 @@ html, body {
 .izitris-logo img { width: 100%; height: 100%; object-fit: cover; }
 
 .giveaways-hero-copy h1 { font-size: 4.5rem; font-weight: 900; margin-bottom: 15px; }
-.giveaways-hero-copy p { color: var(--text-secondary); font-size: 1.2rem; }
 
 /* --- STATYSTYKI --- */
 .stats-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; background: var(--bg-elevated); padding: 40px; border-radius: 40px; border: 1px solid var(--border-soft); margin-top: 30px; }
@@ -51,9 +51,9 @@ html, body {
 .giveaways-navigation-container { position: sticky; top: 20px; z-index: 1000; display: flex; justify-content: center; padding-bottom: 50px; }
 .giveaways-liquid-nav { background: var(--bg-elevated); backdrop-filter: blur(20px); padding: 8px; border-radius: 100px; border: 1px solid var(--border-soft); display: flex; gap: 5px; }
 .nav-link { text-decoration: none; color: var(--text-secondary); padding: 12px 25px; border-radius: 100px; transition: 0.3s; font-weight: 600; }
-.nav-link.active { background: var(--green-gradient); color: #000; }
+.nav-link.active { background: var(--green-gradient); color: #000 !important; }
 
-/* --- SEKCJIE I PRZYCISKI (NAPRAWA) --- */
+/* --- SEKCJE I PRZYCISKI --- */
 .content-section { padding: 60px 0; }
 .giveaways-cta-band { background: var(--bg-elevated); border: 1px solid var(--border-soft); border-radius: 40px; padding: 50px; display: flex; justify-content: space-between; align-items: center; gap: 30px; }
 
@@ -67,12 +67,10 @@ html, body {
     text-decoration: none; 
     transition: 0.3s; 
     text-align: center;
-    box-shadow: 0 10px 30px rgba(0, 255, 136, 0.2);
 }
 .giveaways-primary-btn:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(0, 255, 136, 0.4); }
 
-/* SOCIAL MEDIA GRID */
-.social-grid { display: flex; gap: 15px; flex-wrap: wrap; }
+.social-grid { display: flex; gap: 15px; flex-wrap: wrap; justify-content: center; }
 .social-item { 
     display: flex; 
     align-items: center; 
@@ -84,28 +82,22 @@ html, body {
     color: white !important; 
     border: 1px solid var(--border-soft); 
     transition: 0.3s;
-    font-weight: 600;
 }
 .social-item:hover { border-color: var(--green-neon); background: rgba(0, 255, 136, 0.08); transform: translateY(-3px); }
 
-/* --- WIDEO --- */
-.video-responsive-wrapper { position: relative; padding-bottom: 56.25%; border-radius: 30px; overflow: hidden; border: 1px solid var(--border-soft); }
-.video-responsive-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
-
-/* --- MOBILE (TELEFON) --- */
+/* --- MOBILE --- */
 @media (max-width: 1100px) {
-    .giveaways-hero-clean { flex-direction: column; gap: 30px; }
+    .giveaways-hero-clean { flex-direction: column; }
     .giveaways-hero-copy h1 { font-size: 3rem; }
     .izitris-logo { width: 220px; height: 220px; }
     .giveaways-cta-band { flex-direction: column; text-align: center; padding: 40px 20px; }
     .stats-container { grid-template-columns: 1fr; }
     
-    /* Przyciski na całą szerokość na telefonie */
+    /* Przyciski i Sociale na telefonie */
     .giveaways-primary-btn, .social-item { width: 100%; justify-content: center; }
-    .giveaways-cta-band-actions { width: 100%; display: flex; flex-direction: column; gap: 15px; }
-    
-    /* Social media jeden pod drugim */
-    .social-grid { width: 100%; flex-direction: column; }
+    .giveaways-cta-band-actions, .social-grid { width: 100%; display: flex; flex-direction: column; gap: 15px; }
 }
 
-.cursor-glow { position: fixed; top: 0; left: 0; width: 600px
+.cursor-glow { position: fixed; top: 0; left: 0; width: 600px; height: 600px; background: radial-gradient(circle, rgba(0, 255, 136, 0.1) 0%, transparent 70%); border-radius: 50%; pointer-events: none; z-index: -1; transform: translate(-50%, -50%); }
+.red-alert { color: var(--red-alert) !important; }
+.giveaways-section-kicker { color: var(--green-neon); text-transform: uppercase; letter-spacing: 3px; font-weight: 700; font-size: 0.8rem; margin-bottom: 10px; }
