@@ -77,15 +77,15 @@
                 </div>
                 <div class="social-grid">
                     <a href="https://youtube.com/@IzitriS" target="_blank" class="social-item">
-                        <img height="50px" src="Assets/yt_icon.png">
+                        <img height="40px" src="Assets/yt_icon.png">
                         <span>YouTube</span>
                     </a>
-                    <a href="https://www.tiktok.com/@izitris" class="social-item">
-                         <img height="50px" src="Assets/tt_icon.png">
+                    <a href="https://www.tiktok.com/@izitris" target="_blank" class="social-item">
+                         <img height="40px" src="Assets/tt_icon.png">
                         <span>TikTok</span>
                     </a>
-                    <a href="https://www.instagram.com/izitris/" class="social-item">
-                        <img height="50px" src="Assets/i_icon.png">
+                    <a href="https://www.instagram.com/izitris/" target="_blank" class="social-item">
+                        <img height="40px" src="Assets/i_icon.png">
                         <span>Instagram</span>
                     </a>
                 </div>
@@ -144,7 +144,6 @@
 
     <script>
         lucide.createIcons();
-
         const gridPulse = document.getElementById('gridPulse');
         const corners = ['top-left', 'top-right', 'bottom-left', 'bottom-right'];
         function triggerRandomPulse() {
@@ -182,7 +181,7 @@
         async function loadYouTubeData() {
             try {
                 const response = await fetch('data.json');
-                if (!response.ok) throw new Error('Data pending');
+                if (!response.ok) throw new Error('Pending');
                 const data = await response.json();
                 const format = (num) => {
                     const n = parseInt(num);
