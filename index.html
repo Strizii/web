@@ -2,7 +2,7 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>IzitriS</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -183,9 +183,7 @@
             try {
                 const response = await fetch('data.json');
                 if (!response.ok) throw new Error('Data pending');
-                
                 const data = await response.json();
-
                 const format = (num) => {
                     const n = parseInt(num);
                     if (isNaN(n)) return "...";
@@ -193,16 +191,13 @@
                     if (n >= 1000) return (n / 1000).toFixed(1) + 'k';
                     return n;
                 };
-
                 document.getElementById('stat-subs').innerText = format(data.subs) + '+';
                 document.getElementById('stat-views').innerText = format(data.views) + '+';
                 document.getElementById('stat-videos').innerText = data.videos;
-                
                 const iframe = document.getElementById('latestVideo');
                 if(iframe && data.videoId) {
                     iframe.src = `https://www.youtube.com/embed/${data.videoId}`;
                 }
-
             } catch (error) {
                 document.getElementById('stat-subs').innerText = "15k+";
                 document.getElementById('stat-views').innerText = "56 mln+";
@@ -210,7 +205,6 @@
                 document.getElementById('latestVideo').src = "https://www.youtube.com/embed/dQw4w9WgXcQ";
             }
         }
-
         document.addEventListener('DOMContentLoaded', loadYouTubeData);
     </script>
 </body>
