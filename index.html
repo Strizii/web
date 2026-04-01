@@ -212,49 +212,4 @@
         document.addEventListener('DOMContentLoaded', loadYouTubeData);
     </script>
 </body>
-</html>SelectorAll('section, header, .latest-video-container');
-        window.addEventListener('scroll', () => {
-            let current = "";
-            sections.forEach(section => {
-                if (window.scrollY >= section.offsetTop - 350) {
-                    const id = section.getAttribute('id');
-                    if(id) current = id;
-                }
-            });
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href').includes(current)) link.classList.add('active');
-            });
-        });
-
-        // Pobieranie danych YouTube
-        async function loadYouTubeData() {
-            try {
-                const response = await fetch('data.json');
-                if (!response.ok) throw new Error('Pending');
-                const data = await response.json();
-                const format = (num) => {
-                    const n = parseInt(num);
-                    if (isNaN(n)) return "...";
-                    if (n >= 1000000) return (n / 1000000).toFixed(1) + ' mln';
-                    if (n >= 1000) return (n / 1000).toFixed(1) + 'k';
-                    return n;
-                };
-                document.getElementById('stat-subs').innerText = format(data.subs) + '+';
-                document.getElementById('stat-views').innerText = format(data.views) + '+';
-                document.getElementById('stat-videos').innerText = data.videos;
-                const iframe = document.getElementById('latestVideo');
-                if(iframe && data.videoId) {
-                    iframe.src = `https://www.youtube.com/embed/${data.videoId}`;
-                }
-            } catch (error) {
-                document.getElementById('stat-subs').innerText = "15k+";
-                document.getElementById('stat-views').innerText = "56 mln+";
-                document.getElementById('stat-videos').innerText = "500+";
-                document.getElementById('latestVideo').src = "https://www.youtube.com/embed/dQw4w9WgXcQ";
-            }
-        }
-        document.addEventListener('DOMContentLoaded', loadYouTubeData);
-    </script>
-</body>
 </html>
