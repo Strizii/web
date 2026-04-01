@@ -96,7 +96,14 @@
             <div class="giveaways-section-kicker">Wszystko co najlepsze</div>
             <h2 class="video-title">Najnowszy film</h2>
             <div class="video-responsive-wrapper">
-                <iframe id="latestVideo" src="" frameborder="0" allowfullscreen></iframe>
+                <iframe 
+                    id="latestVideo"
+                    src="" 
+                    title="Izitris Najnowszy Film" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
             </div>
         </div>
 
@@ -114,70 +121,6 @@
         </section>
 
         <section id="collab" class="content-section">
-            <div class="giveaways-cta-band collab-band">
-                <div class="giveaways-cta-band-copy">
-                    <div class="giveaways-section-kicker">Masz pytania?</div>
-                    <h2>Współpraca</h2>
-                    <p>Zapraszam do kontaktu!</p>
-                </div>
-                <div class="giveaways-cta-band-actions collab-actions">
-                    <a href="mailto:biznesowy.izitris@gmail.com" class="giveaways-primary-btn">Napisz</a>
-                    <a href="#" class="social-item discord-btn">
-                        <i data-lucide="message-square"></i>
-                        <span>Discord</span>
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <footer class="giveaways-like-footer">
-            <p>&copy; 2026 IzitriS. Wszystkie prawa zastrzeżone.</p>
-        </footer>
-    </div>
-
-    <script>
-        lucide.createIcons();
-        
-        // Animacja tła
-        const gridPulse = document.getElementById('gridPulse');
-        const corners = ['top-left', 'top-right', 'bottom-left', 'bottom-right'];
-        function triggerRandomPulse() {
-            gridPulse.className = 'grid-pulse'; 
-            void gridPulse.offsetWidth; 
-            const randomCorner = corners[Math.floor(Math.random() * corners.length)];
-            gridPulse.classList.add(`from-${randomCorner}`);
-        }
-        triggerRandomPulse();
-        setInterval(triggerRandomPulse, 8000); 
-
-        // Poświata myszy
-        const glow = document.getElementById('cursorGlow');
-        document.addEventListener('mousemove', (e) => {
-            glow.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0)`;
-        });
-
-        // Dane YouTube
-        async function loadYouTubeData() {
-            try {
-                const response = await fetch('data.json');
-                const data = await response.json();
-                const format = (n) => n >= 1000000 ? (n/1000000).toFixed(1)+' mln' : (n >= 1000 ? (n/1000).toFixed(1)+'k' : n);
-                document.getElementById('stat-subs').innerText = format(data.subs) + '+';
-                document.getElementById('stat-views').innerText = format(data.views) + '+';
-                document.getElementById('stat-videos').innerText = data.videos;
-                if(data.videoId) document.getElementById('latestVideo').src = `https://www.youtube.com/embed/${data.videoId}`;
-            } catch (e) {
-                document.getElementById('stat-subs').innerText = "15k+";
-                document.getElementById('stat-views').innerText = "56 mln+";
-                document.getElementById('stat-videos').innerText = "500+";
-                document.getElementById('latestVideo').src = "https://www.youtube.com/embed/dQw4w9WgXcQ";
-            }
-        }
-        loadYouTubeData();
-    </script>
-</body>
-</html>
-     <section id="collab" class="content-section">
             <div class="giveaways-cta-band collab-band">
                 <div class="giveaways-cta-band-copy">
                     <div class="giveaways-section-kicker">Masz pytania?</div>
@@ -225,6 +168,51 @@
         // Scroll Spy
         const navLinks = document.querySelectorAll('.nav-link');
         const sections = document.querySelectorAll('section, header, .latest-video-container');
+        window.addEventListener('scroll', () => {
+            let current = "";
+            sections.forEach(section => {
+                if (window.scrollY >= section.offsetTop - 350) {
+                    const id = section.getAttribute('id');
+                    if(id) current = id;
+                }
+            });
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').includes(current)) link.classList.add('active');
+            });
+        });
+
+        // Pobieranie danych YouTube
+        async function loadYouTubeData() {
+            try {
+                const response = await fetch('data.json');
+                if (!response.ok) throw new Error('Pending');
+                const data = await response.json();
+                const format = (num) => {
+                    const n = parseInt(num);
+                    if (isNaN(n)) return "...";
+                    if (n >= 1000000) return (n / 1000000).toFixed(1) + ' mln';
+                    if (n >= 1000) return (n / 1000).toFixed(1) + 'k';
+                    return n;
+                };
+                document.getElementById('stat-subs').innerText = format(data.subs) + '+';
+                document.getElementById('stat-views').innerText = format(data.views) + '+';
+                document.getElementById('stat-videos').innerText = data.videos;
+                const iframe = document.getElementById('latestVideo');
+                if(iframe && data.videoId) {
+                    iframe.src = `https://www.youtube.com/embed/${data.videoId}`;
+                }
+            } catch (error) {
+                document.getElementById('stat-subs').innerText = "15k+";
+                document.getElementById('stat-views').innerText = "56 mln+";
+                document.getElementById('stat-videos').innerText = "500+";
+                document.getElementById('latestVideo').src = "https://www.youtube.com/embed/dQw4w9WgXcQ";
+            }
+        }
+        document.addEventListener('DOMContentLoaded', loadYouTubeData);
+    </script>
+</body>
+</html>SelectorAll('section, header, .latest-video-container');
         window.addEventListener('scroll', () => {
             let current = "";
             sections.forEach(section => {
