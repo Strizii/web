@@ -12,14 +12,18 @@
     <link rel="icon" type="image/x-icon" href="Assets/favicon.ico">
 </head>
 <body>
+    
     <div class="background-system">
         <div class="bg-gradient"></div>
         <div class="grid-base"></div>
         <div class="grid-pulse" id="gridPulse"></div>
     </div>
+
     <div class="cursor-glow" id="cursorGlow"></div>
     <div class="section-bg-glow"></div>
+
     <div class="giveaways-main-wrapper">
+        
         <nav class="giveaways-navigation-container">
             <div class="giveaways-liquid-nav">
                 <a href="#home" class="nav-link active">Główna</a>
@@ -28,6 +32,7 @@
                 <a href="#collab" class="nav-link">Współpraca</a>
             </div>
         </nav>
+
         <header id="home" class="content-section-hero">
             <div class="giveaways-hero-clean">
                 <div class="hero-logo-section">
@@ -46,6 +51,7 @@
                 </p>
                 </div>
             </div>
+
             <div class="stats-container">
                 <div class="stat-box">
                     <span class="stat-value" id="stat-subs">...</span>
@@ -61,6 +67,7 @@
                 </div>
             </div>
         </header>
+
         <section id="socials" class="content-section">
             <div class="giveaways-cta-band">
                 <div class="giveaways-cta-band-copy">
@@ -84,13 +91,22 @@
                 </div>
             </div>
         </section>
+
         <div id="video-section" class="latest-video-container small-video">
             <div class="giveaways-section-kicker">Wszystko co najlepsze</div>
             <h2 class="video-title">Najnowszy film</h2>
             <div class="video-responsive-wrapper">
-                <iframe id="latestVideo" src="" title="Izitris Najnowszy Film" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <iframe 
+                    id="latestVideo"
+                    src="" 
+                    title="Izitris Najnowszy Film" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
             </div>
         </div>
+
         <section id="partners" class="content-section">
             <div class="giveaways-cta-band">
                 <div class="giveaways-cta-band-copy">
@@ -103,6 +119,7 @@
                 </div>
             </div>
         </section>
+
         <section id="collab" class="content-section">
             <div class="giveaways-cta-band collab-band">
                 <div class="giveaways-cta-band-copy">
@@ -119,12 +136,16 @@
                 </div>
             </div>
         </section>
+
         <footer class="giveaways-like-footer">
             <p>&copy; 2026 IzitriS. Wszystkie prawa zastrzeżone.</p>
         </footer>
     </div>
+
     <script>
         lucide.createIcons();
+
+        // Animacja Grid Pulse
         const gridPulse = document.getElementById('gridPulse');
         const corners = ['top-left', 'top-right', 'bottom-left', 'bottom-right'];
         function triggerRandomPulse() {
@@ -135,12 +156,16 @@
         }
         triggerRandomPulse();
         setInterval(triggerRandomPulse, 8000); 
+
+        // Poświata kursora
         const glow = document.getElementById('cursorGlow');
         document.addEventListener('mousemove', (e) => {
             const x = e.clientX;
             const y = e.clientY;
             glow.style.transform = `translate3d(${x}px, ${y}px, 0)`;
         });
+
+        // Scroll Spy
         const navLinks = document.querySelectorAll('.nav-link');
         const sections = document.querySelectorAll('section, header, .latest-video-container');
         window.addEventListener('scroll', () => {
@@ -156,6 +181,8 @@
                 if (link.getAttribute('href').includes(current)) link.classList.add('active');
             });
         });
+
+        // Pobieranie danych YouTube
         async function loadYouTubeData() {
             try {
                 const response = await fetch('data.json');
@@ -172,7 +199,9 @@
                 document.getElementById('stat-views').innerText = format(data.views) + '+';
                 document.getElementById('stat-videos').innerText = data.videos;
                 const iframe = document.getElementById('latestVideo');
-                if(iframe && data.videoId) { iframe.src = `https://www.youtube.com/embed/${data.videoId}`; }
+                if(iframe && data.videoId) {
+                    iframe.src = `https://www.youtube.com/embed/${data.videoId}`;
+                }
             } catch (error) {
                 document.getElementById('stat-subs').innerText = "15k+";
                 document.getElementById('stat-views').innerText = "56 mln+";
