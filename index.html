@@ -143,10 +143,8 @@
     </div>
 
     <script>
-        // Inicjalizacja ikon Lucide
         lucide.createIcons();
 
-        // Obsługa animacji siatki (Grid Pulse)
         const gridPulse = document.getElementById('gridPulse');
         const corners = ['top-left', 'top-right', 'bottom-left', 'bottom-right'];
         function triggerRandomPulse() {
@@ -158,7 +156,6 @@
         triggerRandomPulse();
         setInterval(triggerRandomPulse, 8000); 
 
-        // Efekt poświaty myszki
         const glow = document.getElementById('cursorGlow');
         document.addEventListener('mousemove', (e) => {
             const x = e.clientX;
@@ -166,7 +163,6 @@
             glow.style.transform = `translate3d(${x}px, ${y}px, 0)`;
         });
 
-        // Scroll Spy - podświetlanie aktywnego linku w menu
         const navLinks = document.querySelectorAll('.nav-link');
         const sections = document.querySelectorAll('section, header, .latest-video-container');
         window.addEventListener('scroll', () => {
@@ -183,16 +179,13 @@
             });
         });
 
-        // FUNKCJA POBIERAJĄCA DANE Z PLIKU JSON
         async function loadYouTubeData() {
             try {
-                // Próba pobrania pliku data.json wygenerowanego przez GitHub Actions
                 const response = await fetch('data.json');
-                if (!response.ok) throw new Error('Plik data.json jeszcze nie istnieje');
+                if (!response.ok) throw new Error('Data pending');
                 
                 const data = await response.json();
 
-                // Formatowanie liczb (np. 15400 -> 15.4k)
                 const format = (num) => {
                     const n = parseInt(num);
                     if (isNaN(n)) return "...";
@@ -201,20 +194,16 @@
                     return n;
                 };
 
-                // Aktualizacja statystyk
                 document.getElementById('stat-subs').innerText = format(data.subs) + '+';
                 document.getElementById('stat-views').innerText = format(data.views) + '+';
                 document.getElementById('stat-videos').innerText = data.videos;
                 
-                // Aktualizacja iframe z najnowszym filmem
                 const iframe = document.getElementById('latestVideo');
                 if(iframe && data.videoId) {
                     iframe.src = `https://www.youtube.com/embed/${data.videoId}`;
                 }
 
             } catch (error) {
-                console.warn("Informacja: Oczekiwanie na dane z GitHub Actions...", error.message);
-                // Wartości domyślne w razie braku pliku
                 document.getElementById('stat-subs').innerText = "15k+";
                 document.getElementById('stat-views').innerText = "56 mln+";
                 document.getElementById('stat-videos').innerText = "500+";
@@ -222,8 +211,11 @@
             }
         }
 
-        // Uruchom ładowanie danych po wczytaniu strony
         document.addEventListener('DOMContentLoaded', loadYouTubeData);
+    </script>
+</body>
+</html>
+dEventListener('DOMContentLoaded', loadYouTubeData);
     </script>
 </body>
 </html>
