@@ -96,6 +96,149 @@
             <div class="giveaways-section-kicker">Wszystko co najlepsze</div>
             <h2 class="video-title">Najnowszy film</h2>
             <div class="video-responsive-wrapper">
+                <iframe id="latestVideo" src="" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+
+        <section id="partners" class="content-section">
+            <div class="giveaways-cta-band">
+                <div class="giveaways-cta-band-copy">
+                    <div class="giveaways-section-kicker">Partnerzy</div>
+                    <h2 class="red-alert">Narazie ni ma :(</h2>
+                    <p>Ubiegnij innych i stań się pierwszą marką!</p>
+                </div>
+                <div class="giveaways-cta-band-actions">
+                    <a href="#collab" class="giveaways-primary-btn">Zostań Pierwszym</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="collab" class="content-section">
+            <div class="giveaways-cta-band">
+                <div class="giveaways-cta-band-copy">
+                    <div class="giveaways-section-kicker">Masz pytania?</div>
+                    <h2>Współpraca</h2>
+                    <p>Zapraszam do kontaktu!</p>
+                </div>
+                <div class="giveaways-cta-band-actions">
+                    <a href="mailto:biznesowy.izitris@gmail.com" class="giveaways-primary-btn">Napisz do mnie</a>
+                    <a href="#" class="social-item discord-btn">
+                        <i data-lucide="message-square"></i>
+                        <span>Discord</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <footer class="giveaways-like-footer">
+            <p>&copy; 2026 IzitriS. Wszystkie prawa zastrzeżone.</p>
+        </footer>
+    </div>
+
+    <script>
+        lucide.createIcons();
+        
+        // Funkcje tła
+        const gridPulse = document.getElementById('gridPulse');
+        const corners = ['top-left', 'top-right', 'bottom-left', 'bottom-right'];
+        function triggerRandomPulse() {
+            gridPulse.className = 'grid-pulse'; 
+            void gridPulse.offsetWidth; 
+            const randomCorner = corners[Math.floor(Math.random() * corners.length)];
+            gridPulse.classList.add(`from-${randomCorner}`);
+        }
+        triggerRandomPulse();
+        setInterval(triggerRandomPulse, 8000); 
+
+        // Glow kursora
+        const glow = document.getElementById('cursorGlow');
+        document.addEventListener('mousemove', (e) => {
+            glow.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0)`;
+        });
+
+        // Dane YouTube
+        async function loadYouTubeData() {
+            try {
+                const response = await fetch('data.json');
+                const data = await response.json();
+                const format = (n) => n >= 1000000 ? (n/1000000).toFixed(1)+' mln' : (n >= 1000 ? (n/1000).toFixed(1)+'k' : n);
+                document.getElementById('stat-subs').innerText = format(data.subs) + '+';
+                document.getElementById('stat-views').innerText = format(data.views) + '+';
+                document.getElementById('stat-videos').innerText = data.videos;
+                if(data.videoId) document.getElementById('latestVideo').src = `https://www.youtube.com/embed/${data.videoId}`;
+            } catch (e) {
+                document.getElementById('stat-subs').innerText = "15k+";
+                document.getElementById('stat-views').innerText = "56 mln+";
+                document.getElementById('stat-videos').innerText = "500+";
+                document.getElementById('latestVideo').src = "https://www.youtube.com/embed/dQw4w9WgXcQ";
+            }
+        }
+        loadYouTubeData();
+    </script>
+</body>
+</html>
+            <div class="giveaways-hero-clean">
+                <div class="hero-logo-section">
+                    <div class="avatar-glow-container">
+                        <div class="izitris-logo">
+                            <img alt="Avatar kanalu IztriS" src="Assets/IzitriS_avatar.png">
+                        </div>
+                    </div>
+                </div>
+                <div class="giveaways-hero-copy">
+                    <div class="giveaways-section-kicker">Witaj w kolonii</div>
+                    <h1>IzitriS</h1>
+                    <p>Twórca Internetowy CS 2.<br>
+                    Filmy od gracza dla graczy. O wszystkim i niczym.<br>
+                    <div class="giveaways-section-kicker">Codziennie o 15</div>
+                </p>
+                </div>
+            </div>
+
+            <div class="stats-container">
+                <div class="stat-box">
+                    <span class="stat-value" id="stat-subs">...</span>
+                    <span class="stat-label">Subskrybentów</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-value" id="stat-views">...</span>
+                    <span class="stat-label">Wyświetleń</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-value" id="stat-videos">...</span>
+                    <span class="stat-label">Filmów</span>
+                </div>
+            </div>
+        </header>
+
+        <section id="socials" class="content-section">
+            <div class="giveaways-cta-band">
+                <div class="giveaways-cta-band-copy">
+                    <div class="giveaways-section-kicker">Bądź na bieżąco</div>
+                    <h2>Social Media</h2>
+                    <p>Śledź mnie na wszystkich platformach, aby nie przegapić nowości.</p>
+                </div>
+                <div class="social-grid">
+                    <a href="https://youtube.com/@IzitriS" target="_blank" class="social-item">
+                        <img height="40px" src="Assets/yt_icon.png">
+                        <span>YouTube</span>
+                    </a>
+                    <a href="https://www.tiktok.com/@izitris" target="_blank" class="social-item">
+                         <img height="40px" src="Assets/tt_icon.png">
+                        <span>TikTok</span>
+                    </a>
+                    <a href="https://www.instagram.com/izitris/" target="_blank" class="social-item">
+                        <img height="40px" src="Assets/i_icon.png">
+                        <span>Instagram</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <div id="video-section" class="latest-video-container small-video">
+            <div class="giveaways-section-kicker">Wszystko co najlepsze</div>
+            <h2 class="video-title">Najnowszy film</h2>
+            <div class="video-responsive-wrapper">
                 <iframe 
                     id="latestVideo"
                     src="" 
