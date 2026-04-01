@@ -114,14 +114,14 @@
         </section>
 
         <section id="collab" class="content-section">
-            <div class="giveaways-cta-band">
+            <div class="giveaways-cta-band collab-band">
                 <div class="giveaways-cta-band-copy">
                     <div class="giveaways-section-kicker">Masz pytania?</div>
                     <h2>Współpraca</h2>
                     <p>Zapraszam do kontaktu!</p>
                 </div>
-                <div class="giveaways-cta-band-actions">
-                    <a href="mailto:biznesowy.izitris@gmail.com" class="giveaways-primary-btn">Napisz do mnie</a>
+                <div class="giveaways-cta-band-actions collab-actions">
+                    <a href="mailto:biznesowy.izitris@gmail.com" class="giveaways-primary-btn">Napisz</a>
                     <a href="#" class="social-item discord-btn">
                         <i data-lucide="message-square"></i>
                         <span>Discord</span>
@@ -138,7 +138,7 @@
     <script>
         lucide.createIcons();
         
-        // Funkcje tła
+        // Animacja tła
         const gridPulse = document.getElementById('gridPulse');
         const corners = ['top-left', 'top-right', 'bottom-left', 'bottom-right'];
         function triggerRandomPulse() {
@@ -150,7 +150,7 @@
         triggerRandomPulse();
         setInterval(triggerRandomPulse, 8000); 
 
-        // Glow kursora
+        // Poświata myszy
         const glow = document.getElementById('cursorGlow');
         document.addEventListener('mousemove', (e) => {
             glow.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0)`;
@@ -177,49 +177,7 @@
     </script>
 </body>
 </html>
-            <div class="giveaways-hero-clean">
-                <div class="hero-logo-section">
-                    <div class="avatar-glow-container">
-                        <div class="izitris-logo">
-                            <img alt="Avatar kanalu IztriS" src="Assets/IzitriS_avatar.png">
-                        </div>
-                    </div>
-                </div>
-                <div class="giveaways-hero-copy">
-                    <div class="giveaways-section-kicker">Witaj w kolonii</div>
-                    <h1>IzitriS</h1>
-                    <p>Twórca Internetowy CS 2.<br>
-                    Filmy od gracza dla graczy. O wszystkim i niczym.<br>
-                    <div class="giveaways-section-kicker">Codziennie o 15</div>
-                </p>
-                </div>
-            </div>
-
-            <div class="stats-container">
-                <div class="stat-box">
-                    <span class="stat-value" id="stat-subs">...</span>
-                    <span class="stat-label">Subskrybentów</span>
-                </div>
-                <div class="stat-box">
-                    <span class="stat-value" id="stat-views">...</span>
-                    <span class="stat-label">Wyświetleń</span>
-                </div>
-                <div class="stat-box">
-                    <span class="stat-value" id="stat-videos">...</span>
-                    <span class="stat-label">Filmów</span>
-                </div>
-            </div>
-        </header>
-
-        <section id="socials" class="content-section">
-            <div class="giveaways-cta-band">
-                <div class="giveaways-cta-band-copy">
-                    <div class="giveaways-section-kicker">Bądź na bieżąco</div>
-                    <h2>Social Media</h2>
-                    <p>Śledź mnie na wszystkich platformach, aby nie przegapić nowości.</p>
-                </div>
-                <div class="social-grid">
-                    <a href="https://youtube.com/@IzitriS" target="_blank" class="social-item">
+blank" class="social-item">
                         <img height="40px" src="Assets/yt_icon.png">
                         <span>YouTube</span>
                     </a>
