@@ -15,6 +15,7 @@
 
 * { box-sizing: border-box; margin: 0; padding: 0; scroll-behavior: smooth; }
 
+/* Blokada przesunięć bocznych */
 html, body { 
     width: 100%;
     max-width: 100%;
@@ -24,6 +25,7 @@ html, body {
 
 body { min-height: 100vh; font-family: var(--font-family); color: var(--text-primary); background-color: var(--bg-base); }
 
+/* --- System tła --- */
 .background-system { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -3; pointer-events: none; }
 .bg-gradient { position: absolute; width: 100%; height: 100%; background: radial-gradient(circle at 15% 15%, var(--bg-emerald-deep) 0%, var(--bg-base) 100%); }
 .grid-base, .grid-pulse { position: absolute; width: 200%; height: 200%; top: -50%; left: -50%; background-size: 60px 60px; transform: rotate(-5deg); }
@@ -35,6 +37,7 @@ body { min-height: 100vh; font-family: var(--font-family); color: var(--text-pri
 
 .giveaways-main-wrapper { max-width: 1300px; margin: 0 auto; padding: 0 20px; width: 100%; }
 
+/* --- Hero --- */
 .content-section-hero { padding: 160px 0 80px 0; display: flex; flex-direction: column; }
 .giveaways-hero-clean { display: flex; align-items: center; gap: 80px; margin-bottom: 60px; }
 
@@ -45,68 +48,52 @@ body { min-height: 100vh; font-family: var(--font-family); color: var(--text-pri
 .giveaways-hero-copy h1 { font-size: 5rem; color: #ffffff; text-shadow: 0 0 40px rgba(255, 255, 255, 0.4); font-weight: 900; margin-bottom: 20px; letter-spacing: -2px; }
 .giveaways-hero-copy p { color: var(--text-secondary); max-width: 550px; font-size: 1.25rem; line-height: 1.6; }
 
+/* --- Statystyki --- */
 .stats-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; background: rgba(10, 23, 15, 0.6); backdrop-filter: blur(20px); padding: 40px; border-radius: 40px; border: 1px solid var(--border-soft); }
 .stat-box { text-align: center; }
 .stat-value { font-size: 2.5rem; font-weight: 800; color: var(--green-neon); display: block; }
 .stat-label { font-size: 0.8rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 2px; }
 
+/* --- Menu --- */
 .giveaways-navigation-container { display: flex; justify-content: center; position: sticky; top: 20px; z-index: 1000; padding-bottom: 40px; width: 100%; }
 .giveaways-liquid-nav { background: var(--bg-elevated); backdrop-filter: blur(25px); border: 1px solid var(--border-soft); border-radius: 999px; padding: 6px; display: flex; flex-wrap: wrap; justify-content: center; max-width: 95vw; }
 .nav-link { text-decoration: none; color: var(--text-secondary); padding: 10px 20px; border-radius: 999px; transition: 0.3s; font-size: 0.9rem; font-weight: 500; white-space: nowrap; }
 .nav-link.active { background: var(--green-gradient); color: #020503; font-weight: 700; box-shadow: 0 4px 15px rgba(0, 255, 136, 0.4); }
 
+/* --- Sekcje i Karty --- */
 .content-section { padding: 80px 0; width: 100%; }
 .giveaways-cta-band { width: 100%; background: rgba(10, 23, 15, 0.5); backdrop-filter: blur(15px); border: 1px solid var(--border-soft); border-radius: 40px; padding: 50px; display: flex; justify-content: space-between; align-items: center; gap: 30px; }
 
-.social-grid { display: flex; gap: 15px; flex-wrap: wrap; justify-content: center; width: 100%; }
-.social-item { display: flex; align-items: center; gap: 12px; padding: 18px 25px; background: rgba(255,255,255,0.05); border-radius: 18px; text-decoration: none; color: white; border: 1px solid var(--border-soft); transition: 0.3s; flex: 1 1 auto; min-width: 140px; justify-content: center; }
+/* --- Social Media Grid --- */
+.social-grid { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; width: 100%; }
+.social-item { display: flex; align-items: center; gap: 10px; padding: 15px 20px; background: rgba(255,255,255,0.05); border-radius: 15px; text-decoration: none; color: white; border: 1px solid var(--border-soft); transition: 0.3s; flex: 1 1 auto; min-width: 130px; justify-content: center; }
 .social-item:hover { border-color: var(--green-neon); background: rgba(0, 255, 136, 0.08); transform: translateY(-3px); }
 
+/* --- Przyciski główne --- */
 .giveaways-primary-btn { display: inline-block; background: var(--green-gradient); color: #020503 !important; padding: 20px 40px; border-radius: 18px; font-weight: 800; text-decoration: none; transition: 0.3s; text-align: center; border: none; }
 .giveaways-primary-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(0, 255, 136, 0.4); }
 
 .discord-btn { background: rgba(255,255,255,0.05); border: 1px solid var(--border-soft); color: white !important; }
 
+/* --- Wideo --- */
 .latest-video-container { max-width: 1000px; margin: 0 auto; text-align: center; width: 100%; }
 .video-responsive-wrapper { position: relative; padding-bottom: 56.25%; border-radius: 30px; overflow: hidden; border: 2px solid var(--border-soft); }
 .video-responsive-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
 
+/* --- RWD (Telefony) --- */
 @media (max-width: 1100px) {
     .giveaways-hero-clean { flex-direction: column; text-align: center; gap: 40px; }
     .izitris-logo { width: 220px; height: 220px; }
     .giveaways-hero-copy h1 { font-size: 3rem; }
     .giveaways-cta-band { flex-direction: column; text-align: center; padding: 40px 20px; }
     .stats-container { grid-template-columns: 1fr; padding: 30px; }
+    
+    /* Sociale pod sobą na telefonie */
     .social-item { flex: 1 1 100%; }
+    
+    /* Przyciski akcji pod sobą */
     .giveaways-cta-band-actions { width: 100%; display: flex; flex-direction: column; gap: 15px; }
-}
-
-.grid-pulse { background-image: linear-gradient(rgba(0, 255, 136, 0.2) 2px, transparent 2px), linear-gradient(90deg, rgba(0, 255, 136, 0.2) 2px, transparent 2px); opacity: 0; animation: smoothPulse 6s var(--ease-out-quint) infinite; }
-@keyframes smoothPulse { 0% { opacity: 0; } 15% { opacity: 1; } 85% { opacity: 1; } 100% { opacity: 0; } }
-
-.giveaways-like-footer { text-align: center; padding: 100px 0 50px; opacity: 0.4; font-size: 0.8rem; }
-.red-alert { color: var(--red-alert) !important; }
-.giveaways-section-kicker { color: var(--green-neon); text-transform: uppercase; letter-spacing: 3px; font-weight: 700; font-size: 0.75rem; margin-bottom: 10px; }
-t: center; 
-}
-.social-item:hover { border-color: var(--green-neon); background: rgba(0, 255, 136, 0.08); transform: translateY(-3px); }
-
-.latest-video-container { max-width: 1000px; margin: 0 auto; text-align: center; width: 100%; }
-.video-responsive-wrapper { position: relative; padding-bottom: 56.25%; border-radius: 30px; overflow: hidden; border: 2px solid var(--border-soft); }
-.video-responsive-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
-
-@media (max-width: 1100px) {
-    .giveaways-hero-clean { flex-direction: column; text-align: center; gap: 40px; }
-    .izitris-logo { width: 220px; height: 220px; }
-    .giveaways-hero-copy h1 { font-size: 3rem; }
-    .giveaways-cta-band { flex-direction: column; text-align: center; padding: 40px 20px; }
-    .stats-container { grid-template-columns: 1fr; padding: 30px; }
-}
-
-@media (max-width: 768px) {
-    .nav-link { padding: 8px 14px; font-size: 0.8rem; }
-    .giveaways-liquid-nav { border-radius: 20px; }
-    .social-item { min-width: 100%; } /* Na bardzo małych ekranach linki jeden pod drugim */
+    .giveaways-primary-btn, .discord-btn { width: 100%; }
 }
 
 .grid-pulse { background-image: linear-gradient(rgba(0, 255, 136, 0.2) 2px, transparent 2px), linear-gradient(90deg, rgba(0, 255, 136, 0.2) 2px, transparent 2px); opacity: 0; animation: smoothPulse 6s var(--ease-out-quint) infinite; }
